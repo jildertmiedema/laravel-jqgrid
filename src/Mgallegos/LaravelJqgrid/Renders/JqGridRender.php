@@ -515,8 +515,8 @@ class JqGridRender implements RenderInterface {
 	/**
 	 * Main method that construct the html and javascript code of the grid.
 	 *
-	 * @param  boolean $script
-	 * 	If true a script tag before constructin the grid. Default is true
+	 * @param  boolean $createScript
+	 * 	If true the script will be created in the output. Default is true
 	 * @param  boolean $createTableElement
 	 * 	If true the table element is created automatically from this method. Default is true
 	 * @param  boolean $createPagerElement
@@ -526,7 +526,7 @@ class JqGridRender implements RenderInterface {
 	 * @return mixed
 	 * 	String if $echo is set to false, void in any other case
 	 */
-	public function renderGrid($script = true, $createTableElement = true, $createPagerElement = true, $echo = true)
+	public function renderGrid($createScript = true, $createTableElement = true, $createPagerElement = true, $echo = true)
 	{
 		$this->options = array_add($this->options, 'colModel', $this->colModel);
 		
@@ -587,9 +587,13 @@ class JqGridRender implements RenderInterface {
 		
 		$this->filterToolbarOptions = $this->defaultfilterToolbarOptions;
 		
-		if($script)
+		if($createScript)
 		{
 			$script = '<script type="text/javascript">'.$script.'</script>';
+		} 
+		else
+		{
+			$script = '';
 		}
 		
 		if($echo)
